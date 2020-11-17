@@ -13,7 +13,8 @@ runs:
     - name: Get Version
       run: |
         echo "Getting latest commit..."
-        git log -1
+        LAST_COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+        echo "${LAST_COMMIT_MESSAGE}"
       env:
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       shell: bash
