@@ -16,5 +16,4 @@ jobs:
       - name: Release
         uses: ./.github/actions/incremental-release
         with:
-          DRY_RUN: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

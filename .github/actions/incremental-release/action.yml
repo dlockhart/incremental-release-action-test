@@ -13,29 +13,31 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Get Version
+    - name: Incremental Release
       run: |
-        LAST_COMMIT_MESSAGE=$(git log -1 --pretty=%B)
-        echo "Last commit message: $LAST_COMMIT_MESSAGE"
+        if [ ${{ contains(github.event.head_commit.message, 'skip ci') }} == true ]; then
+          echo "[skip ci] detected, so skipping release."
+          exit 0;
+        fi
 
         TYPE=${DEFAULT_INCREMENT}
-        if [[ $LAST_COMMIT_MESSAGE == *"[increment patch]"* ]]; then
+        if [ ${{ !contains(github.event.head_commit.message, '[increment patch]') }} == true ]; then
           echo "Found [increment patch], creating a patch release..."
           TYPE="patch"
-        elif [[ $LAST_COMMIT_MESSAGE == *"[increment minor]"* ]]; then
+        elif [ ${{ !contains(github.event.head_commit.message, '[increment minor]') }} == true ]; then
           echo "Found [increment minor], creating a minor release..."
           TYPE="minor"
-        elif [[ $LAST_COMMIT_MESSAGE == *"[increment major]"* ]]; then
+        elif [ ${{ !contains(github.event.head_commit.message, '[increment major]') }} == true ]; then
           echo "Found [increment major], creating a major release..."
           TYPE="major"
-        elif [[ $LAST_COMMIT_MESSAGE == *"[skip version]"* ]]; then
+        elif [ ${{ !contains(github.event.head_commit.message, '[skip version]') }} == true ]; then
           echo "Found [skip version], skipping release..."
           TYPE="skip"
         else
           echo "Did not find commit message flag, using DEFAULT_INCREMENT ($DEFAULT_INCREMENT)"
         fi
 
-        if [[ $TYPE == "skip" ]]; then
+        if [ $TYPE == "skip" ]; then
           echo "Skipping release."
           exit 0;
         fi
@@ -45,8 +47,14 @@ runs:
         
         echo "Executing: \"npm version ${TYPE}\"..."
         NEW_VERSION=$(npm version ${TYPE} -m "Updated version to %s [skip ci][skip version]")
-        echo "New version created: $NEW_VERSION"
+        echo "New version number will be: $NEW_VERSION"
 
+        if [ ${{ inputs.DRY_RUN }} == true ]; then
+          echo "DRY_RUN option specified, aborting release creation."
+          exit 0;
+        fi
+        
+        echo "Executing: \"git push --follow-tags\""
         git push --follow-tags
 
       env:
