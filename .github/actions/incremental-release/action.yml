@@ -11,11 +11,9 @@ runs:
   using: composite
   steps:
     - name: Get Version
-      script: |
+      run: |
         echo "Getting latest commit..."
-        const commits = github.repos.listCommits(
-          {{ github.repository_owner }},
-          {{ github.repository }}
-        );
-        console.log(commits);
-      github-token: ${{ secrets.GITHUB_TOKEN }}
+        git log -1
+      env:
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+      shell: bash
