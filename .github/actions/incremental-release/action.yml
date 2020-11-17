@@ -45,9 +45,7 @@ runs:
         NEW_VERSION=$(npm version ${TYPE} -m "Updated version to %s [skip ci][skip version]")
         echo "New version created: $NEW_VERSION"
 
-        
-        #git tag -a -m "test" v1.0.0
-        git push 
+        git push --tags
 
       env:
         DEFAULT_INCREMENT: ${{ inputs.DEFAULT_INCREMENT }}
