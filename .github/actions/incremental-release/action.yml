@@ -16,7 +16,7 @@ runs:
     - name: Get Version
       run: |
         LAST_COMMIT_MESSAGE=$(git log -1 --pretty=%B)
-        echo "Last commit message: ${LAST_COMMIT_MESSAGE}"
+        echo "Last commit message: $LAST_COMMIT_MESSAGE"
 
         TYPE=${DEFAULT_INCREMENT}
         if [[ $LAST_COMMIT_MESSAGE == *"[increment patch]"* ]]; then
@@ -42,12 +42,11 @@ runs:
         git config user.name github-actions
         git config user.email github-actions@github.com
         
-        echo "Executing: npm version ${TYPE}..."
+        echo "Executing: \"npm version ${TYPE}\"..."
         NEW_VERSION=$(npm version ${TYPE} -m "Updated version to %s [skip ci][skip version]")
         echo "New version created: $NEW_VERSION"
 
-        git push
-        git push --tags
+        git push --follow-tags
 
       env:
         DEFAULT_INCREMENT: ${{ inputs.DEFAULT_INCREMENT }}
