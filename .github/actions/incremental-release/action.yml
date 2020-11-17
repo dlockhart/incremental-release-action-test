@@ -8,7 +8,7 @@ inputs:
     description: Simulates a release but does not actually do one
     default: false
   GITHUB_TOKEN:
-    description: Token to use to update version in 'package.json' and create GitHub release/tag
+    description: Token to use to update version in 'package.json' and create the tag
     required: true
 runs:
   using: composite
@@ -21,16 +21,16 @@ runs:
         fi
 
         TYPE=${DEFAULT_INCREMENT}
-        if [ ${{ !contains(github.event.head_commit.message, '[increment patch]') }} == true ]; then
+        if [ ${{ contains(github.event.head_commit.message, '[increment patch]') }} == true ]; then
           echo "Found [increment patch], creating a patch release..."
           TYPE="patch"
-        elif [ ${{ !contains(github.event.head_commit.message, '[increment minor]') }} == true ]; then
+        elif [ ${{ contains(github.event.head_commit.message, '[increment minor]') }} == true ]; then
           echo "Found [increment minor], creating a minor release..."
           TYPE="minor"
-        elif [ ${{ !contains(github.event.head_commit.message, '[increment major]') }} == true ]; then
+        elif [ ${{ contains(github.event.head_commit.message, '[increment major]') }} == true ]; then
           echo "Found [increment major], creating a major release..."
           TYPE="major"
-        elif [ ${{ !contains(github.event.head_commit.message, '[skip version]') }} == true ]; then
+        elif [ ${{ contains(github.event.head_commit.message, '[skip version]') }} == true ]; then
           echo "Found [skip version], skipping release..."
           TYPE="skip"
         else
