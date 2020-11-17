@@ -1,0 +1,21 @@
+name: Incremental Release
+description: Create a release based on commit message flags
+inputs:
+  DRY_RUN:
+    description: Simulates a release but does not actually do one
+    default: false
+  GITHUB_TOKEN:
+    description: Token to use to update version in 'package.json' and create GitHub release/tag
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Get Version
+      script: |
+        echo "Getting latest commit..."
+        const commits = github.repos.listCommits(
+          {{ github.repository_owner }},
+          {{ github.repository }}
+        );
+        console.log(commits);
+      github-token: ${{ secrets.GITHUB_TOKEN }}
