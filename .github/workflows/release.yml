@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node
         uses: Brightspace/third-party-actions@actions/setup-node
       - name: Release
-        uses: ./workflows/actions/incremental-release
+        uses: ./.github/actions/incremental-release
         with:
           DEFAULT_INCREMENT: minor
           GITHUB_TOKEN: ${{ secrets.TEST_SECRET }}
