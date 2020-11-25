@@ -17,5 +17,4 @@ jobs:
         uses: BrightspaceUI/actions/incremental-release@master
         with:
           DEFAULT_INCREMENT: minor
-          DRY_RUN: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
