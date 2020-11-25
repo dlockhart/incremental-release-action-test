@@ -14,7 +14,7 @@ jobs:
       - name: Setup Node
         uses: Brightspace/third-party-actions@actions/setup-node
       - name: Release
-        uses: ./.github/actions/incremental-release
+        uses: BrightspaceUI/actions/incremental-release@master
         with:
           DEFAULT_INCREMENT: minor
           DRY_RUN: true
