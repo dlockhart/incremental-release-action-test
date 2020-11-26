@@ -12,12 +12,13 @@ async function createRelease() {
 	console.log(`Creating release ${release} ${owner}\\${repo}...`)
 
 	const response = await octokit.repos.createRelease({
-		owner: 'owner',
 		repo: repo,
 		tag_name: release,
 		name: release
 	});
-	console.log(response);
+	if (response.status !== 201) {
+		console.errpr(response);
+	}
 
 }
 
