@@ -9,10 +9,12 @@ const octokit = new Octokit({
 
 console.log(`Creating release ${release} ${owner}\\${repo}...`)
 
-octokit.repos.createRelease({
-	owner,
-	repo,
-	release
+const response = await octokit.repos.createRelease({
+	owner: owner,
+	repo: repo,
+	tag_name: release,
+	name: release
 });
+console.log(response);
 
 process.exit(0);
