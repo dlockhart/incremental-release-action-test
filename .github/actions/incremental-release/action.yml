@@ -66,6 +66,9 @@ runs:
       shell: bash
     - name: Create Release
       run: |
+        if [ ${{ steps.determine-increment.outputs.increment }} == "skip" ]; then
+          exit 0;
+        fi
         if [ ${{ inputs.DRY_RUN }} == true ]; then
           echo "DRY_RUN option specified, skipping release creation."
           exit 0;
