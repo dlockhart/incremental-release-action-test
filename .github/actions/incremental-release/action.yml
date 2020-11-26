@@ -44,7 +44,6 @@ runs:
         
         git config user.name github-actions
         git config user.email github-actions@github.com
-        git config push.default simple
         
         echo "Executing: \"npm version ${TYPE}\"..."
         NEW_VERSION=$(npm version ${TYPE} -m "Updated version to %s [skip ci][skip version]")
