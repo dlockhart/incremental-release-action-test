@@ -18,6 +18,6 @@ jobs:
       - name: Release
         uses: ./.github/actions/incremental-release
         with:
-          DRY_RUN: true
-          DEFAULT_INCREMENT: minor
+          DRY_RUN: false
+          DEFAULT_INCREMENT: skip
           GITHUB_TOKEN: ${{ secrets.TEST_SECRET }}
