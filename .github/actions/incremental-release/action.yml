@@ -44,6 +44,7 @@ runs:
         
         git config user.name brightspace-bot
         git config user.email brightspacegithubreader@d2l.com
+        git config push.default simple
         
         echo "Executing: \"npm version ${TYPE}\"..."
         NEW_VERSION=$(npm version ${TYPE} -m "Updated version to %s [skip ci][skip version]")
