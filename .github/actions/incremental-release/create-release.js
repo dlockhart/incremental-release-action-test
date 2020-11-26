@@ -12,7 +12,7 @@ async function createRelease() {
 	console.log(`Creating release ${release} ${owner}\\${repo}...`)
 
 	const response = await octokit.repos.createRelease({
-		owner: owner,
+		owner: 'owner',
 		repo: repo,
 		tag_name: release,
 		name: release
