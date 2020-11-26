@@ -7,15 +7,21 @@ const octokit = new Octokit({
 	auth: process.env.GITHUB_TOKEN
 });
 
-console.log(`Creating release ${release} ${owner}\\${repo}...`)
+async function createRelease() {
 
-octokit.repos.createRelease({
-	owner: owner,
-	repo: repo,
-	tag_name: release,
-	name: release
-}).then((response) => {
+	console.log(`Creating release ${release} ${owner}\\${repo}...`)
+
+	const response = await octokit.repos.createRelease({
+		owner: owner,
+		repo: repo,
+		tag_name: release,
+		name: release
+	});
 	console.log(response);
+
+}
+
+createRelease().then(() => {
 	process.exit(0);
 }).catch((err) => {
 	console.error(err);
