@@ -42,8 +42,8 @@ runs:
           exit 0;
         fi
         
-        git config user.name brightspace-bot
-        git config user.email brightspacegithubreader@d2l.com
+        git config user.name github-actions
+        git config user.email github-actions@github.com
         git config push.default simple
         
         echo "Executing: \"npm version ${TYPE}\"..."
