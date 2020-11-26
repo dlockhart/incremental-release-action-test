@@ -1,11 +1,18 @@
 const { Octokit } = require('@octokit/core');
 
 const release = process.argv[2];
+const [owner, repo] = process.env['GITHUB_REPOSITORY'].split('/');
 
 const octokit = new Octokit({
 	auth: process.env.GITHUB_TOKEN
 });
 
-console.log(`Creating release ${release}...`)
+console.log(`Creating release ${release} ${owner}\\${repo}...`)
 
-process.exit();
+/*octokit.repos.createRelease({
+	owner,
+	repo,
+	release
+});*/
+
+process.exit(0);
