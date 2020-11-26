@@ -9,15 +9,18 @@ const octokit = new Octokit({
 
 async function createRelease() {
 
-	console.log(`Creating release ${release} ${owner}\\${repo}...`)
+	console.log(`Creating release "${release}"...`)
 
 	const response = await octokit.repos.createRelease({
+		owner: owner,
 		repo: repo,
 		tag_name: release,
 		name: release
 	});
 	if (response.status !== 201) {
-		console.errpr(response);
+		console.error(response);
+	} else {
+		console.log('Success!');
 	}
 
 }
