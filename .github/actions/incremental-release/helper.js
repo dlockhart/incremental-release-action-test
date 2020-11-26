@@ -1,4 +1,4 @@
-const Octokit = require('@octokit/rest');
+const { Octokit } = require('@octokit/rest');
 
 const lastCommitMessage = process.argv[2];
 const defaultIncrement = process.argv[3];
