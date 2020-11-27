@@ -19,5 +19,5 @@ jobs:
         uses: ./.github/actions/incremental-release
         with:
           DRY_RUN: false
-          DEFAULT_INCREMENT: skip
-          GITHUB_TOKEN: ${{ secrets.TEST_SECRET }}
+          DEFAULT_INCREMENT: patch
+          GITHUB_TOKEN: ${{ secrets.D2L_GITHUB_TOKEN }}
