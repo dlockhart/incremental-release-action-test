@@ -8,6 +8,7 @@ async function createRelease() {
 
 	console.log(`Creating release "${release}"...`)
 
+	const auth = createActionAuth();
 	const { token } = await auth();
 	const octokit = new Octokit({
 		auth: token
