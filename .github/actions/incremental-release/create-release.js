@@ -1,10 +1,12 @@
-const { Octokit } = require('@octokit/rest');
+const { createActionAuth } = require("@octokit/auth-action"),
+	{ Octokit } = require('@octokit/rest');
 
 const release = process.argv[2];
 const [owner, repo] = process.env['GITHUB_REPOSITORY'].split('/');
+const { token } = await auth();
 
 const octokit = new Octokit({
-	auth: process.env.GITHUB_TOKEN
+	auth: token
 });
 
 async function createRelease() {

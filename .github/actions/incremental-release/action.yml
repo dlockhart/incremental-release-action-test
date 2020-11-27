@@ -17,7 +17,7 @@ runs:
       run: |
         if [ ${{ !contains(github.event.head_commit.message, 'skip ci') }} == true ]; then
           echo "Installing dependencies..."
-          npm install @octokit/rest@18 --prefix ${{ github.action_path }} --no-save --loglevel error
+          npm install @octokit/rest@18 @octokit/auth-action@1 --prefix ${{ github.action_path }} --no-save --loglevel error
         fi
       shell: bash
     - name: Determine Increment
