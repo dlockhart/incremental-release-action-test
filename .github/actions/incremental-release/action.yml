@@ -75,5 +75,5 @@ runs:
         fi
         node ${{ github.action_path }}/create-release.js ${{ steps.increment-version.outputs.version }}
       env:
-        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+        GH_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       shell: bash

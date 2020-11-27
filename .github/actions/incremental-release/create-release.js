@@ -4,7 +4,7 @@ const release = process.argv[2];
 const [owner, repo] = process.env['GITHUB_REPOSITORY'].split('/');
 
 const octokit = new Octokit({
-	auth: process.env.GITHUB_TOKEN
+	auth: process.env.GH_TOKEN
 });
 
 async function createRelease() {
