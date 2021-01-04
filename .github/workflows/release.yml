@@ -14,8 +14,13 @@ jobs:
       - name: Setup Node
         uses: Brightspace/third-party-actions@actions/setup-node
       - name: Release
+        id: release
         uses: ./.github/actions/incremental-release
         with:
           DRY_RUN: false
           DEFAULT_INCREMENT: patch
           GITHUB_TOKEN: ${{ secrets.D2L_GITHUB_TOKEN }}
+      - name: Post-Release
+        if: steps.release.outputs.VERSION != ''
+        run: |
+          echo "Post-release version was: ${{ steps.release.outputs.VERSION }}"
