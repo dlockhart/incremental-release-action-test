@@ -1,6 +1,6 @@
 {
   "name": "incremental-release-action-test",
-  "version": "2.15.1",
+  "version": "2.16.0",
   "description": "test",
   "main": "index.js",
   "scripts": {
